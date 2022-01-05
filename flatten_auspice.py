@@ -34,3 +34,7 @@ for node in nodes:
         'private_muts': muts
     })
 json.dump(private_muts,open('private_muts.json','w'),indent=4)
+
+# %%
+
+# %%

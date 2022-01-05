@@ -5,15 +5,18 @@ from collections import defaultdict
 from collections import OrderedDict
 #%%
 privates = json.load(open('private_muts.json'))
-lineage_muts = json.load(open('lineage_per_mutation.json'))
-
+privates
+#%%
+clade_muts = json.load(open('clade_muts.json'))
+clade_muts
+#%%
 #%%
 for sequence in privates:
-    candidates = defaultdict(int)
+    foreign_muts = defaultdict(list)
     for mutation in sequence['private_muts']:
-        for lineage in lineage_muts.get(mutation,[]):
-            candidates[lineage] += 1
-    sequence['candidate_contaminants'] = OrderedDict(sorted(candidates.items(), key=lambda x: x[1], reverse=True))
+        for clade in clade_muts.get(mutation,[]):
+            foreign_muts[mutation].append(clade['Nextstrain_clade'])
+    sequence['foreign_mutations'] = foreign_muts
 
 privates
 
